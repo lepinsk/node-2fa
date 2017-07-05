@@ -7,7 +7,11 @@ function generateSecret(options) {
     var bin = crypto.randomBytes(20);
     var base32 = b32.encode(bin).toString('utf8').replace(/=/g, '');
     var secret = base32.toLowerCase().replace(/(\w{4})/g, "$1 ").trim().split(' ').join('').toUpperCase();
-    var uri = 'otpauth://totp/' + encodeURIComponent(options.name || 'App') + encodeURIComponent(options.account ? ':' + options.account : '') + '%3Fsecret=' + secret;
+    var uri = 'otpauth://totp/' + 
+                encodeURIComponent(options.name || 'App') + 
+                encodeURIComponent(options.account ? ':' + options.account : '') + 
+                '?secret=' + secret + 
+                (options.name ? '&issuer=' + options.name : '');
     return {
         secret: secret,
         uri: uri,
