@@ -11,7 +11,7 @@ function generateSecret(options) {
                 encodeURIComponent(options.name || 'App') + 
                 encodeURIComponent(options.account ? ':' + options.account : '') + 
                 '?secret=' + secret + 
-                (options.name ? '&issuer=' + options.name : '');
+                (options.name ? '&issuer=' + encodeURIComponent(options.name) : '');
     return {
         secret: secret,
         uri: uri,
